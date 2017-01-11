@@ -1,14 +1,19 @@
 from django.db import connections
 from django.db.models import Count
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render
+import json
 
 from .models import Play
-
 
 def graph(request):
     return render(request, 'graph/graph.html')
 
+def date_handler(obj):
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
+    else:
+        raise TypeError
 
 def play_count_by_month(request):
     data = Play.objects.all() \
@@ -19,4 +24,4 @@ def play_count_by_month(request):
         ) \
         .values('month') \
         .annotate(count_items=Count('id'))
-    return JsonResponse(list(data), safe=False)
+    return HttpResponse(json.dumps(list(data), default=date_handler), content_type="application/json")

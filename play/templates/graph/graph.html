@@ -32,8 +32,9 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%Y-%m-%d").parse; // for dates like "2014-01-01"
-//var parseDate = d3.time.format("%Y-%m-%dT00:00:00Z").parse;  // for dates like "2014-01-01T00:00:00Z"
+// var parseDate = d3.time.format("%Y-%m-%d").parse; // for dates like "2014-01-01"
+// var parseDate = d3.time.format("%Y-%m-%dT00:00:00Z").parse;  // for dates like "2014-01-01T00:00:00Z"
+var parseDate = d3.time.format("%Y-%m-%dT00:00:00").parse;  // for dates like "2014-01-01T00:00:00Z"
 
 var x = d3.time.scale()
     .range([0, width]);
